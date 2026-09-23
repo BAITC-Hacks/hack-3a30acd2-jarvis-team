@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "task_id": 1,
+    "team_id": 1,
+    "idea": "Реестр оплат с CSV-импортом и быстрым поиском.",
+    "plan": "Уточнить сценарий, собрать прототип, проверить на синтетических данных.",
+    "estimated_duration": "3 недели",
+    "prototype_url": "https://example.org/taskup-demo/1",
+    "status": "pending"
+  },
+  {
+    "id": 2,
+    "task_id": 1,
+    "team_id": 2,
+    "idea": "Начнём с проверки качества CSV и отчёта по неоплаченным курсам.",
+    "plan": "Уточнить сценарий, собрать прототип, проверить на синтетических данных.",
+    "estimated_duration": "2 недели",
+    "prototype_url": "https://example.org/taskup-demo/2",
+    "status": "pending"
+  },
+  {
+    "id": 3,
+    "task_id": 2,
+    "team_id": 4,
+    "idea": "Экран загрузки мастерской с понятной шкалой времени.",
+    "plan": "Уточнить сценарий, собрать прототип, проверить на синтетических данных.",
+    "estimated_duration": "2 недели",
+    "prototype_url": "https://example.org/taskup-demo/3",
+    "status": "pending"
+  },
+  {
+    "id": 4,
+    "task_id": 3,
+    "team_id": 3,
+    "idea": "Простой журнал полива с поиском по датам.",
+    "plan": "Уточнить сценарий, собрать прототип, проверить на синтетических данных.",
+    "estimated_duration": "10 дней",
+    "prototype_url": "https://example.org/taskup-demo/4",
+    "status": "pending"
+  },
+  {
+    "id": 5,
+    "task_id": 5,
+    "team_id": 5,
+    "idea": "Форма отзывов и сводка для преподавателя.",
+    "plan": "Уточнить сценарий, собрать прототип, проверить на синтетических данных.",
+    "estimated_duration": "2 недели",
+    "prototype_url": "https://example.org/taskup-demo/5",
+    "status": "pending"
+  }
+]
