@@ -1,0 +1,141 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  passwordHash String
+  role         String
+  company      String?
+  isDemo       Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  team         Team?
+  challenges   Challenge[]
+  sessions     Session[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Team {
+  id           String        @id @default(cuid())
+  ownerId      String        @unique
+  name         String
+  university   String        @default("")
+  description  String        @default("")
+  tagline      String        @default("")
+  experience   String        @default("")
+  casesJson    String        @default("[]")
+  skills       String        @default("")
+  portfolio    String        @default("")
+  isDemo       Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  owner        User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  members      Member[]
+  applications Application[]
+  photos       TeamPhoto[]
+  reviews      TeamReview[]
+}
+
+model TeamPhoto {
+  id        String   @id @default(cuid())
+  teamId    String
+  caption   String   @default("")
+  data      Bytes
+  createdAt DateTime @default(now())
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@index([teamId, createdAt])
+}
+
+model TeamReview {
+  id          String    @id @default(cuid())
+  teamId      String
+  challengeId String    @unique
+  rating      Int
+  comment     String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  team        Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  @@index([teamId, createdAt])
+}
+
+model Member {
+  id     String @id @default(cuid())
+  teamId String
+  name   String
+  role   String @default("")
+  team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@index([teamId])
+}
+
+model Challenge {
+  id                  String        @id @default(cuid())
+  ownerId             String
+  company             String
+  industry            String
+  draft               String
+  briefJson           String        @default("{}")
+  answersJson         String        @default("{}")
+  questionsJson       String        @default("[]")
+  lockedFieldsJson    String        @default("[]")
+  assumptionsJson     String        @default("[]")
+  recommendationsJson String        @default("[]")
+  score               Int           @default(0)
+  status              String        @default("DRAFT")
+  isDemo              Boolean       @default(false)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  owner               User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  applications        Application[]
+  review              TeamReview?
+
+  @@index([ownerId, status])
+  @@index([status, createdAt])
+}
+
+model Application {
+  id          String    @id @default(cuid())
+  challengeId String
+  teamId      String
+  proposal    String
+  experience  String
+  timeline    String
+  status      String    @default("PENDING")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  team        Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@unique([challengeId, teamId])
+  @@index([teamId, status])
+}
+
+model RateLimit {
+  id        String   @id
+  count     Int      @default(1)
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}
