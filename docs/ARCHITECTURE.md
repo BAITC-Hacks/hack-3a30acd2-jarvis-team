@@ -127,6 +127,7 @@ TaskUp AI/
 │   │   │   └── hooks.ts             Загрузка данных и выполнение действий
 │   │   ├── types/index.ts          TypeScript-контракт и подписи полей
 │   │   ├── components/common.tsx   Рейтинг, критерии, уведомления и карточки
+│   │   ├── components/ProjectArtwork.tsx Локальная графика обложек и баннеров
 │   │   └── pages/
 │   │       ├── Home.tsx             Выбор роли и демо-профиля
 │   │       ├── Catalog.tsx          Общий каталог и фильтры

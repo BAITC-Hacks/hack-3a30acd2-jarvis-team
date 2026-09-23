@@ -1,6 +1,7 @@
 import { ArrowUpRight, Check, CircleHelp, LoaderCircle, Plus, Trash2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { Criterion, PublicTask, Score } from '../types'
+import { ProjectArtwork } from './ProjectArtwork'
 
 export function PageHeading({ eyebrow, title, description, action }: { eyebrow?: string; title: string; description?: string; action?: React.ReactNode }) {
   return <div className="page-heading"><div>{eyebrow && <div className="eyebrow">{eyebrow}</div>}<h1>{title}</h1>{description && <p>{description}</p>}</div>{action}</div>
@@ -25,7 +26,13 @@ export function ScorePanel({ score, preview = false }: { score: Score; preview?:
   </section>
 }
 export function TaskTile({ task }: { task: PublicTask }) {
-  return <Link className="task-tile" to={`/tasks/${task.id}`}><div className="tile-top"><span className="tag">{task.industry}</span><ArrowUpRight size={19} /></div><h2>{task.card.title}</h2><p className="task-need">{task.card.need || 'Потребность предстоит уточнить вместе с бизнесом.'}</p><div className="company">{task.business_name}</div><div className="tile-bottom"><ScoreBadge score={task.score} /><span className="small muted">{task.proposal_count} откл.</span></div></Link>
+  return <Link className="task-tile" to={`/tasks/${task.id}`}>
+    <ProjectArtwork industry={task.industry} variant={task.id} />
+    <div className="tile-content"><div className="tile-top"><span className="tag">{task.industry}</span><span className="tile-reference">#{String(task.id).padStart(3, '0')}</span></div>
+      <h2>{task.card.title}</h2><p className="task-need">{task.card.need || 'Потребность предстоит уточнить вместе с бизнесом.'}</p>
+      <div className="company">{task.business_name}</div><div className="tile-bottom"><ScoreBadge score={task.score} /><span className="small muted">{task.proposal_count} откл.</span></div>
+    </div>
+  </Link>
 }
 export function CriteriaEditor({ value, onChange, prefix = 'criterion' }: { value: Criterion[]; onChange: (value: Criterion[]) => void; prefix?: string }) {
   const keys: (keyof Criterion)[] = ['criterion', 'expected_value', 'verification_method']

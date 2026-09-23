@@ -66,6 +66,12 @@ npm run dev
 FastAPI + Pydantic → SQLAlchemy → SQLite. Внешний LLM вызывается только из backend.
 Frontend использует настоящий API; localStorage хранит исключительно выбранный демо-профиль.
 
+Интерфейс оформлен в тёмном студийном стиле по визуальному референсу
+[Higgsfield](https://higgsfield.ai/): верхняя навигация, крупная типографика,
+графитовые поверхности, белые кнопки и лаймовый акцент. Обложки задач и графика
+баннеров созданы средствами CSS и Lucide локально; внешние картинки и шрифты
+для отображения не требуются. Анимации учитывают `prefers-reduced-motion`.
+
 ```text
 backend/app/api/             маршруты, права и сериализация
 backend/app/models.py       Business, Task, Team, Proposal, Milestone
@@ -79,7 +85,7 @@ backend/tests/              проверки правил и сквозной AP
 frontend/src/api/           HTTP-клиент и состояния запросов
 frontend/src/types/         общий с Pydantic TaskCard
 frontend/src/pages/         каталог, кабинеты, конструктор, карточка
-frontend/src/components/    рейтинг, поля критериев и общие состояния
+frontend/src/components/    рейтинг, поля критериев, обложки задач и общие состояния
 frontend/tests/             браузерный сценарий Playwright
 seed/                      JSON-наборы синтетических данных
 ```
