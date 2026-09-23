@@ -2,6 +2,7 @@
 .venv/
 __pycache__/
 .pytest_cache/
+pytest-cache-files-*/
 *.py[cod]
 backend/data/*.db*
 backend/data/*.sqlite*
@@ -12,3 +13,4 @@ frontend/playwright-report/
 *.log
 .DS_Store
 artifacts/
+TaskUp-AI-source.zip
